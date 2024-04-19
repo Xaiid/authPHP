@@ -62,6 +62,12 @@
             </table>
             </div>
 
+            <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+            <button id="new-member">
+                <!--  -->
+                Nuevo Miembro
+            </button>
+
             <div>
             <button id="previous">
                 <!-- Botón para ir a la página anterior -->

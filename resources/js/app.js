@@ -7,16 +7,46 @@ await import("jquery-ui/dist/themes/ui-darkness/jquery-ui.css")
 
 $(document).ready(getData); // Llamada a la función getData al cargar la página
 
+console.log("my js")
+
       let items = [];
       let currentPage = 1;
       let itemsPerPage = 20;
       let originalData;
 
+      function createMember() {
+        // Función para obtener los datos del servidor
+        $.ajax({
+          type: "POST",
+          url: "http://localhost/member",
+          data: {
+            "_token": $('#token').val(),
+            'first_name': 'James', 
+            'last_name': 'Potter', 
+            'email': 'james@potter.com',
+             'gender': 'Male',
+              'ip_address': '1.1.1.1'
+          },
+
+          error: function (e) {
+            console.error("Error:", e);
+          },
+
+          success: function () {
+            alert("Nuevo Miembro Registrado");
+          },
+        });
+      }
+
+      $("#new-member").button().on("click", function () {
+        createMember();
+      })
+
       function getData() {
         // Función para obtener los datos del servidor
         $.ajax({
           type: "GET",
-          url: "http://localhost/members",
+          url: "http://localhost/member",
 
           error: function (e) {
             console.error("Error:", e);
