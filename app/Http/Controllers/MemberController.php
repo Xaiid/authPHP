@@ -16,7 +16,12 @@ class MemberController extends Controller
         return Member::all();
     }
 
-    public function create(Request $request): RedirectResponse
+    public function create(Request $request): View
+    {
+        return view('member.create');
+    }
+
+    public function store(Request $request): RedirectResponse
     {
 
         Member::create($request->except(['_token', '_method']));
