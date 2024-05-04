@@ -27,6 +27,11 @@
                     <button id="searchButton">Buscar</button>
                     </div>
 
+                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
+                    <a href="/member" id="new-member">
+                        Nuevo Miembro
+                    </a>
+
                     <div>
                     <table id="table">
                         <!-- Tabla para mostrar los datos -->
@@ -51,12 +56,6 @@
                         <!-- Cuerpo de la tabla -->
                     </table>
                     </div>
-
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
-                    <button id="new-member">
-                        <!--  -->
-                        Nuevo Miembro
-                    </button>
 
                     <div>
                     <button id="previous">

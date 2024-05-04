@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Member extends Model
 {
     /**
-     * The table associated with the model.
+     * La tabla asociada al modelo.
      *
      * @var string
      */

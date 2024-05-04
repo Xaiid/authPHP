@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Member;
+use Illuminate\Support\Facades\Log;
 
 class MemberController extends Controller
 {
@@ -29,30 +30,26 @@ class MemberController extends Controller
         return Redirect::to('/');
     }
 
-    public function edit(Request $request): View
+    public function edit(string $id): View
     {
-        return view('profile.edit', [
-            'member' => $request->member(),
+        return view('member.edit', [
+            'member' => Member::findOrFail($id)
         ]);
     }
 
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request, string $id)
     {
+        $member = Member::find($id);
+        $member->update($request->except(['_token', '_method']));
 
-        // actualizar cada campo y guardar
-
-        $request->member()->save();
-
-        return Redirect::route('member.edit')->with('status', 'member-updated');
+        return  redirect()->back()->withSuccess('Miembro actualizado exitosamente..');
     }
 
-    public function delete(Request $request): RedirectResponse
+    public function delete(string $id)
     {
-
-        $member = $request->member();
-
+        $member = Member::find($id);
         $member->delete();
 
-        return Redirect::to('/');
+        return 'OK';
     }
 }

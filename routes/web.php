@@ -14,11 +14,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // API
-    Route::get('/member', [MemberController::class, 'index']);
+    Route::get('/members', [MemberController::class, 'index']);
     Route::get('/member', [MemberController::class, 'create'])->name('member.create');
     Route::post('/member', [MemberController::class, 'store'])->name('member.store');
-
-    
+    Route::get('/member/{id}', [MemberController::class, 'edit'])->name('member.edit');
+    Route::put('/member/{id}', [MemberController::class, 'update'])->name('member.update');
+    Route::delete('/member/{id}', [MemberController::class, 'delete'])->name('member.delete');
 });
 
 require __DIR__.'/auth.php';

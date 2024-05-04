@@ -7,46 +7,44 @@ await import("jquery-ui/dist/themes/ui-darkness/jquery-ui.css")
 
 $(document).ready(getData); // Llamada a la función getData al cargar la página
 
-console.log("my js")
-
       let items = [];
       let currentPage = 1;
       let itemsPerPage = 20;
       let originalData;
 
-      function createMember() {
-        // Función para obtener los datos del servidor
+      function deleteMember(id) {
+        // Función para borrar miembro
         $.ajax({
-          type: "POST",
-          url: "http://localhost/member",
+          type: "DELETE",
+          url: "/member/" + id,
           data: {
             "_token": $('#token').val(),
-            'first_name': 'James', 
-            'last_name': 'Potter', 
-            'email': 'james@potter.com',
-             'gender': 'Male',
-              'ip_address': '1.1.1.1'
+            "_method": "delete",
           },
 
           error: function (e) {
             console.error("Error:", e);
           },
 
-          success: function () {
-            alert("Nuevo Miembro Registrado");
+          success: function (response) {
+            console.log(response);
+            location.reload();
           },
         });
       }
 
-      $("#new-member").button().on("click", function () {
-        createMember();
+      $(document).delegate(".delete-btn" ,"click", function (event) {
+        event.preventDefault();
+        const memberId = event.target.getAttribute("data-member-id");
+        const memberforDelete = $(event.target).parents('tr');
+        $(memberforDelete).fadeOut('7000', deleteMember(memberId));
       })
 
       function getData() {
         // Función para obtener los datos del servidor
         $.ajax({
           type: "GET",
-          url: "http://localhost/member",
+          url: "/members",
 
           error: function (e) {
             console.error("Error:", e);
@@ -80,6 +78,10 @@ console.log("my js")
               email +
               "</td><td>" +
               gender +
+              "</td><td>" +
+              "<a href='member/" + id + "' class='edit-btn'>Editar</a>" + 
+              "</td><td>" +
+              "<a href='#' data-member-id='" + id  + "' class='delete-btn'>Delete</a>" +
               "</td></tr>"
           );
         });
@@ -99,6 +101,7 @@ console.log("my js")
 
       function setPage(currentPage) {
         // Función para establecer la página actual
+        $('tbody').fadeIn(2000);
         const selectmenuValue = $("#selectmenu").val();
         const itemsPerPage = Number(selectmenuValue);
         const start = (currentPage - 1) * itemsPerPage;
@@ -166,21 +169,24 @@ console.log("my js")
           showLabel: false,
         })
         .click(function () {
-          if (currentPage > 1) {
-            currentPage = currentPage - 1;
-          } else {
-            currentPage = 1;
-          }
-
-          setPage(currentPage);
+          $('tbody').fadeOut(2000, function(){
+            if (currentPage > 1) {
+              currentPage = currentPage - 1;
+            } else {
+              currentPage = 1;
+            }
+  
+            setPage(currentPage);
+        });
         });
 
       $("#paginationButtons").on("click", "button", function () {
         // Función para ir a una página específica
-        const pageText = $(this).text();
-        currentPage = Number(pageText);
-
-        setPage(currentPage);
+          const pageText = $(this).text();
+          currentPage = Number(pageText);
+        $('tbody').fadeOut(2000, function(){
+          setPage(currentPage);
+        });  
       });
 
       $("#next") // Función para ir a la página siguiente
@@ -189,7 +195,8 @@ console.log("my js")
           showLabel: false,
         })
         .click(function () {
-          const selectmenuValue = $("#selectmenu").val();
+          $('tbody').fadeOut(2000, function(){
+            const selectmenuValue = $("#selectmenu").val();
           const itemsPerPage = Number(selectmenuValue);
           const pages = Math.ceil(originalData.length / itemsPerPage);
 
@@ -200,4 +207,6 @@ console.log("my js")
           }
 
           setPage(currentPage);
+          });
+          
         });
