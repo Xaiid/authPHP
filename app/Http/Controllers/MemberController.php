@@ -42,7 +42,7 @@ class MemberController extends Controller
         $member = Member::find($id);
         $member->update($request->except(['_token', '_method']));
 
-        return  redirect()->back()->withSuccess('Miembro actualizado exitosamente..');
+        return  redirect()->back()->withSuccess('Miembro actualizado exitosamente...');
     }
 
     public function delete(string $id)

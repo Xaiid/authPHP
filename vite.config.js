@@ -3,6 +3,9 @@ import laravel from 'laravel-vite-plugin';
 import inject from '@rollup/plugin-inject';
 
 export default defineConfig({
+    hmr: {
+        host: 'localhost',
+      },
     plugins: [
         laravel({
             input: ['resources/js/app.js'],
