@@ -62,6 +62,7 @@ const members = function() {
         const lastName = item.last_name;
         const email = item.email;
         const gender = item.gender;
+        const age = item.age;
   
         $("#tableContent").append(
           "<tr><td>" +
@@ -75,9 +76,11 @@ const members = function() {
             "</td><td>" +
             gender +
             "</td><td>" +
+            age +
+            "</td><td>" +
             "<a href='member/" + id + "' class='edit-btn'>Editar</a>" + 
             "</td><td>" +
-            "<a href='#' data-member-id='" + id  + "' class='delete-btn'>Delete</a>" +
+            "<a href='#' data-member-id='" + id + "' class='delete-btn'>Delete</a>" +
             "</td></tr>"
         );
       });
@@ -110,7 +113,7 @@ const members = function() {
       .button()
       .click(function () {
         const sortKey = $(this).data("sort");
-        items.sort((a, b) => {
+        const sortedItems = originalData.sort((a, b) => {
           if (sortKey === "id") {
             return a[sortKey] - b[sortKey];
           }
@@ -124,9 +127,9 @@ const members = function() {
         });
         this.asc = !this.asc;
         if (!this.asc) {
-          items = items.reverse();
+          sortedItems = sortedItems.reverse();
         }
-        RenderData(items);
+        RenderData(sortedItems);
       });
   
     $("#searchButton") // Función para buscar los datos en la tabla

@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/member/{id}', [MemberController::class, 'update'])->name('member.update');
     Route::delete('/member/{id}', [MemberController::class, 'delete'])->name('member.delete');
 
-    Route::get('/statistics', [StatisticsController::class, 'create'])->name('statistics.create');
+    Route::get('/statistics', [StatisticsController::class, 'barChart'])->name('statistics.create');
 });
 
 require __DIR__.'/auth.php';

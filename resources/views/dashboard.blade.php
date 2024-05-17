@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             Members
         </h2>
-    </x-slot>
+        </x-slot>
 
     <div class="py-12 members-module">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -54,6 +54,7 @@
                             <th>
                             <button data-sort="gender" id="genderButton">Género</button>
                             </th>
+                            <th><button data-sort="age" id="ageButton">Edad</button></th>
                         </tr>
                         </thead>
                         <tbody id="tableContent"></tbody>

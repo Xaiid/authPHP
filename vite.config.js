@@ -4,7 +4,7 @@ import inject from '@rollup/plugin-inject';
 
 export default defineConfig({
     hmr: {
-        host: 'localhost',
+        host: 'localhost:5174',
       },
     plugins: [
         laravel({

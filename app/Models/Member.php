@@ -15,5 +15,5 @@ class Member extends Model
     protected $table = 'members';
     protected $primaryKey = 'id';
     public $timestamps = false;
-    protected $fillable = ['first_name', 'last_name', 'email', 'gender', 'ip_address', '_token', '_method'];
+    protected $fillable = ['first_name', 'last_name', 'email', 'gender',  'age', 'ip_address', '_token', '_method'];
 }
