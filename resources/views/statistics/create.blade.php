@@ -16,9 +16,14 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                 <div style="width: 80%; margin: auto;" data-chart="{{ json_encode($data) }}" class="chart-container">
+                <h3>Genero de los miembros</h3>
                         <canvas id="barChart"></canvas>
                     </div>
 
+                    <div style="width: 80%; margin: auto;" data-chart="{{ json_encode($data) }}" class="chart-container2">
+                    <h3>Edades de los miembros</h3>
+                        <canvas id="doughnutChart"></canvas>
+                    </div>
                  </div>
             </div>
         </div>

@@ -7,14 +7,16 @@ const statistics = function () {
         const chartContainer = document.querySelector('.chart-container');
         const data = JSON.parse(chartContainer.dataset.chart);
 
+        console.log('probando, pues pruebame esta')
+
         var ctx = document.getElementById('barChart').getContext('2d');
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: data['labels'],
+                labels: data['genders']['labels'],
                 datasets: [{
-                    label: 'Data',
-                    data: data['data'],
+                    label: 'Miembros por género',
+                    data: data['genders']['data'],
                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 1
@@ -33,34 +35,33 @@ const statistics = function () {
     function generateDoughnutChart() {
 
 
-        const chartContainer = document.querySelector('.chart-container');
-        console.log(chartContainer.dataset)
-        const data = JSON.parse(chartContainer.dataset.chart);
+        const chartContainer2 = document.querySelector('.chart-container2');
+        const data = JSON.parse(chartContainer2.dataset.chart);
 
-        var ctx = document.getElementById('barChart').getContext('2d');
+        var ctx = document.getElementById('doughnutChart').getContext('2d');
         var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: data['labels'],
+            type: 'doughnut',
+            data : {
+                labels: data['ages']['labels'],
                 datasets: [{
-                    label: 'Data',
-                    data: data['data'],
-                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 1
+                    label: 'Miembros por edades',
+                    data: data['ages']['data'],
+                  backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(153, 102, 255)',
+                    'rgb(255, 159, 64)'
+                  ],
+                  hoverOffset: 4
                 }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
+              }
         });
     }
 
     generateBarChart();
+    generateDoughnutChart();
 
 }
 
